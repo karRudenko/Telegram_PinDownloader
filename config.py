@@ -1,7 +1,11 @@
 # Configuration
+import os
+from dotenv import load_dotenv
 
-BOT_TOKEN = YOUR_TOKEN
-RAPID_API_KEY = YOUR_KEY
+load_dotenv()
+
+BOT_TOKEN = os.getenv("YOUR_TOKEN")
+RAPID_API_KEY = os.getenv("YOUR_KEY")
 URL = "https://pinterest-video-and-image-downloader.p.rapidapi.com/pinterest"
 
 headers = {
