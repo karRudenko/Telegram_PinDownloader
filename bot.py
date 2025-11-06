@@ -3,7 +3,23 @@ from telebot.types import InlineQueryResultVideo, InlineQueryResultPhoto
 import requests
 from config import BOT_TOKEN
 from functions import get_response, get_video_or_img_url, check_and_detect
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
+# --- Start dummy web server so Render detects a port ---
+class HealthHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is running!")
+
+def run_health_server():
+    port = int(os.getenv("PORT", 10000))  # Render assigns this automatically
+    server = HTTPServer(("0.0.0.0", port), HealthHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_health_server, daemon=True).start()
+# -------------------------------------------------------
 
 bot = TeleBot(BOT_TOKEN)
 #-------------------------------------------------------------------#
