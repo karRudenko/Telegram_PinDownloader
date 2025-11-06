@@ -1,7 +1,7 @@
 # Configuration
 
-BOT_TOKEN = "YOUR_TOKEN"
-RAPID_API_KEY = "YOUR_KEY"
+BOT_TOKEN = YOUR_TOKEN
+RAPID_API_KEY = YOUR_KEY
 URL = "https://pinterest-video-and-image-downloader.p.rapidapi.com/pinterest"
 
 headers = {
