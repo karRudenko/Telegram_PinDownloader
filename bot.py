@@ -1,3 +1,4 @@
+import os
 from telebot import TeleBot
 from telebot.types import InlineQueryResultVideo, InlineQueryResultPhoto
 import requests
