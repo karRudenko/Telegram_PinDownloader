@@ -174,7 +174,7 @@ But I only work with Pinterest links 😄
 """)
 
 @bot.message_handler(content_types=['video'])
-def handle_photo(message):
+def handle_video(message):
     bot.reply_to(message, "I had to send the video, not you...😢")
 
 @bot.message_handler(content_types=['document'])
