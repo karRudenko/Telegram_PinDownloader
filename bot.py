@@ -7,20 +7,26 @@ from functions import get_response, get_video_or_img_url, check_and_detect
 import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-# --- Start dummy web server so Render detects a port ---
+# --- Health Check Web Server (for Render & UptimeRobot) ---
 class HealthHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b"Bot is running!")
 
+    def do_HEAD(self):
+        self.send_response(200)
+        self.end_headers()
+
 def run_health_server():
     port = int(os.getenv("PORT", 10000))  # Render assigns this automatically
     server = HTTPServer(("0.0.0.0", port), HealthHandler)
+    print(f"🌐 Health server running on port {port}")
     server.serve_forever()
 
+# Run health server in a background thread
 threading.Thread(target=run_health_server, daemon=True).start()
-# -------------------------------------------------------
+# ------------------------------------------------------------------#
 
 bot = TeleBot(BOT_TOKEN)
 #-------------------------------------------------------------------#
